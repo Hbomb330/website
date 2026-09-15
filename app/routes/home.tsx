@@ -3,15 +3,20 @@ import { Welcome } from "../welcome/welcome";
 
 export function meta({}: Route.MetaArgs) {
 	return [
-		{ title: "New React Router App" },
-		{ name: "description", content: "Welcome to React Router!" },
+		{ title: "Orbit Deck — 4-Song Interactive Edition | HBOMB R.G." },
+		{
+			name: "description",
+			content:
+				"Enter the HBOMB R.G. Orbit Deck: four tracks inside a cinematic, audio-reactive digital experience.",
+		},
+		{ property: "og:title", content: "HBOMB R.G. — Orbit Deck" },
+		{
+			property: "og:description",
+			content: "Four songs. Four worlds. One interactive music experience.",
+		},
 	];
 }
 
-export function loader({ context }: Route.LoaderArgs) {
-	return { message: context.cloudflare.env.VALUE_FROM_CLOUDFLARE };
-}
-
-export default function Home({ loaderData }: Route.ComponentProps) {
-	return <Welcome message={loaderData.message} />;
+export default function Home() {
+	return <Welcome />;
 }
