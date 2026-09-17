@@ -12,8 +12,11 @@ export function Welcome() {
 		<main className="site-shell">
 			<nav className="topbar" aria-label="Primary navigation">
 				<a className="brand" href="#top" aria-label="HBOMB R.G. Orbit Deck home">
-					<span className="brand-mark" aria-hidden="true">H</span>
-					<span>HBOMB R.G.</span>
+					<img className="brand-emblem" src="/hbomb-skull-bomb.svg" alt="" />
+					<span className="brand-lockup">
+						<strong>HBOMB R.G.</strong>
+						<small>ORBIT SIGNAL DIVISION</small>
+					</span>
 				</a>
 				<a className="nav-buy" href={checkoutUrl} target="_blank" rel="noreferrer">
 					Buy Orbit Deck
@@ -43,22 +46,25 @@ export function Welcome() {
 					<p className="delivery-note">Instant digital delivery through Payhip</p>
 				</div>
 
-				<div className="orbit-stage" aria-label="Abstract visualization of the Orbit Deck">
-					<div className="orbit-glow" />
-					<div className="orbit-ring orbit-ring-one" />
-					<div className="orbit-ring orbit-ring-two" />
-					<div className="orbit-ring orbit-ring-three" />
-					<div className="orbit-core">
-						<span className="core-kicker">HBOMB R.G.</span>
-						<strong>ORBIT</strong>
-						<em>DECK</em>
-						<span className="core-edition">4-SONG EDITION</span>
+				<figure className="orbit-stage" aria-label="Four album worlds orbiting the HBOMB signal core">
+					<div className="orbit-frame">
+						<img
+							className="orbit-worlds"
+							src="/orbit-deck-worlds.webp"
+							alt="Four cinematic worlds orbit a glowing red music signal core"
+						/>
+						<div className="core-lockup" aria-hidden="true">
+							<span>HBOMB R.G.</span>
+							<strong>ORBIT</strong>
+							<em>DECK</em>
+						</div>
+						<span className="world-tag world-tag-one">01 · GHOSTS</span>
+						<span className="world-tag world-tag-two">02 · LAST MILE</span>
+						<span className="world-tag world-tag-three">03 · MEDUSA</span>
+						<span className="world-tag world-tag-four">04 · PRESSURE</span>
 					</div>
-					<span className="satellite satellite-one">01</span>
-					<span className="satellite satellite-two">02</span>
-					<span className="satellite satellite-three">03</span>
-					<span className="satellite satellite-four">04</span>
-				</div>
+					<figcaption>Four tracks mapped to four reactive worlds</figcaption>
+				</figure>
 			</section>
 
 			<section className="signal-strip" aria-label="Product highlights">
