@@ -15,8 +15,8 @@
 	},
 	"routes": [
 		{
-			"pattern": "hbombrg2.com",
-			"custom_domain": true
+			"pattern": "hbombrg2.com/*",
+			"zone_name": "hbombrg2.com"
 		}
 	]
 }
