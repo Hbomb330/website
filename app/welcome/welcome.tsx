@@ -1,8 +1,8 @@
 const tracks = [
-	{ number: "01", title: "Gravity of Ghosts", mood: "Dark orbit" },
-	{ number: "02", title: "Last Mile", mood: "Terminal velocity" },
-	{ number: "03", title: "Medusa", mood: "Stone-cold signal" },
-	{ number: "04", title: "Pressure", mood: "Core overload" },
+	{ number: "01", title: "Gravity of Ghosts", mood: "Dark orbit", slug: "gravity-of-ghosts" },
+	{ number: "02", title: "Last Mile", mood: "Terminal velocity", slug: "last-mile" },
+	{ number: "03", title: "Medusa", mood: "Stone-cold signal", slug: "medusa" },
+	{ number: "04", title: "Pressure", mood: "Core overload", slug: "pressure" },
 ];
 
 const checkoutUrl = "https://payhip.com/b/xP2Le";
@@ -49,20 +49,34 @@ export function Welcome() {
 
 				<figure className="orbit-stage" aria-label="Four album worlds orbiting the HBOMB signal core">
 					<div className="orbit-frame">
-						<img
-							className="orbit-worlds"
-							src="/orbit-deck-worlds.webp"
-							alt="Four cinematic worlds orbit a glowing red music signal core"
-						/>
+						<div className="orbit-worlds" aria-label="Four pulsing Orbit Deck cover worlds">
+							{tracks.map((track) => (
+								<div className="world-panel" key={track.number}>
+									<video
+										className="world-video"
+										src={`/worlds/${track.slug}-cover.mp4`}
+										poster={`/worlds/${track.slug}.jpg`}
+										muted
+										loop
+										autoPlay
+										playsInline
+										preload="metadata"
+										aria-label={`${track.title} animated cover`}
+									/>
+									<img
+										className="world-poster"
+										src={`/worlds/${track.slug}.jpg`}
+										alt={`${track.title} cover`}
+									/>
+									<span className="world-tag">{track.number} · {track.title}</span>
+								</div>
+							))}
+						</div>
 						<div className="core-lockup" aria-hidden="true">
 							<span>HBOMB R.G.</span>
 							<strong>ORBIT</strong>
 							<em>DECK</em>
 						</div>
-						<span className="world-tag world-tag-one">01 · GHOSTS</span>
-						<span className="world-tag world-tag-two">02 · LAST MILE</span>
-						<span className="world-tag world-tag-three">03 · MEDUSA</span>
-						<span className="world-tag world-tag-four">04 · PRESSURE</span>
 					</div>
 					<figcaption>Four tracks mapped to four reactive worlds</figcaption>
 				</figure>
