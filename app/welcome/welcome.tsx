@@ -43,7 +43,7 @@ export function Welcome() {
 							Explore the experience
 						</a>
 					</div>
-					<p className="delivery-note">Instant digital delivery through Payhip</p>
+					<p className="delivery-note">Four complete songs • downloadable offline experience • reactive visuals • personal-use license • instant access</p>\n					<p className="delivery-note">Instant digital delivery through Payhip</p>
 				</div>
 
 				<figure className="orbit-stage" aria-label="Four album worlds orbiting the HBOMB signal core">
