@@ -1,22 +1,29 @@
 import type { Route } from "./+types/home";
-import { Welcome } from "../welcome/welcome";
 
 export function meta({}: Route.MetaArgs) {
 	return [
-		{ title: "Orbit Deck — 4-Song Interactive Edition | HBOMB R.G." },
+		{ title: "HBOMB R.G. — Static Pulse Edition" },
 		{
 			name: "description",
-			content:
-				"Enter the HBOMB R.G. Orbit Deck: four tracks inside a cinematic, audio-reactive digital experience.",
-		},
-		{ property: "og:title", content: "HBOMB R.G. — Orbit Deck" },
-		{
-			property: "og:description",
-			content: "Four songs. Four worlds. One interactive music experience.",
+			content: "Explore the HBOMB R.G. Static Pulse Edition storefront.",
 		},
 	];
 }
 
 export default function Home() {
-	return <Welcome />;
+	return (
+		<iframe
+			title="HBOMB R.G. Static Pulse Edition"
+			src="/static-pulse/index.html"
+			style={{
+				position: "fixed",
+				inset: 0,
+				width: "100%",
+				height: "100%",
+				border: 0,
+				background: "#020205",
+			}}
+			allow="autoplay; fullscreen"
+		/>
+	);
 }
