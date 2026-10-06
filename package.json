@@ -1,8 +1,8 @@
 {
 	"name": "website",
-	"description": "Build a full-stack web application with React Router 7.",
+	"description": "HBOMB R.G. Orbit Deck site for hbombrg2.com.",
 	"cloudflare": {
-		"label": "React Router Framework Starter",
+		"label": "HBOMB R.G. Orbit Deck",
 		"products": [
 			"Workers"
 		],
