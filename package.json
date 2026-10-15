@@ -1,8 +1,8 @@
 {
 	"name": "website",
-	"description": "HBOMB R.G. Orbit Deck site for hbombrg2.com.",
+	"description": "HBOMB R.G. app hub and preserved Orbit Deck experience for hbombrg2.com.",
 	"cloudflare": {
-		"label": "HBOMB R.G. Orbit Deck",
+		"label": "HBOMB R.G. App Hub",
 		"products": [
 			"Workers"
 		],
