@@ -10,6 +10,7 @@ const checkoutUrl = "https://payhip.com/b/xP2Le";
 export function Welcome() {
 	return (
 		<main className="site-shell">
+			<a href="/" className="orbit-hub-return">← Back to the app hub</a>
 			<nav className="topbar" aria-label="Primary navigation">
 				<a className="brand" href="#top" aria-label="HBOMB R.G. Orbit Deck home">
 					<img className="brand-emblem" src="/hbomb-skull-bomb.svg" alt="" />

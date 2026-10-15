@@ -1,6 +1,13 @@
-# HBOMB R.G. Orbit Deck site
+# HBOMB R.G. app hub
 
 This React Router app runs on Cloudflare Workers. `wrangler.json` routes the Worker to `hbombrg2.com/*`.
+
+## Pages
+
+- `/`: Windows app downloads, browser preview links, and development status for HB Transfer and HB Chat.
+- `/orbit-deck`: the preserved Orbit Deck presentation, including its media and Payhip links.
+
+App versions and download URLs match the published `Hbomb330/hbombrg-com` catalog. Browser previews are interface simulations; Transfer and Chat have no public production downloads listed.
 
 ## Install and develop
 

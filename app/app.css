@@ -539,3 +539,6 @@ footer {
 	.final-cta { padding-block: 88px; }
 	footer { flex-direction: column; }
 }
+
+.orbit-hub-return { display: block; width: min(1180px, calc(100% - 40px)); margin: 18px auto 0; color: #9bdcff; font-size: 12px; }
+.orbit-hub-return:focus-visible { outline: 2px solid #72dfff; outline-offset: 5px; }
