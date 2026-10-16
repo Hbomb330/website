@@ -21,9 +21,24 @@ References:
 
 ## Verification and remaining device checks
 
-`npm ci`, `npm run check` (production client/server build and Cloudflare deployment dry run), and `git diff --check` pass locally. The existing standalone `npm run typecheck` fails with TS2688 for undeclared `@cloudflare/workers-types`. Applying the type configuration fix proposed separately in PR #13 temporarily makes full typechecking pass; this PR does not include that tooling change.
+### Automated smoke tests
 
-The local Cloudflare development server cannot start in the execution environment (`uv_interface_addresses` error). A standalone browser harness was prepared but could not execute because Chromium was unavailable and its download failed. No automated browser, real Windows, or Fire 7 device result is claimed. Build success is not deployment proof.
+Run locally (Node 22 recommended):
+
+```sh
+npm ci
+npx playwright install --with-deps chromium
+npm run check
+npm run test:browser
+```
+
+Playwright starts a local Vite preview of the production build at `127.0.0.1:4173`; run `npm run check` or `npm run build` again after app changes. It does not deploy or contact the public app. CI runs these steps in the existing `check` job and uploads an HTML report plus failure traces/screenshots for seven days. Open a downloaded trace with `npx playwright show-trace path/to/trace.zip`.
+
+Coverage includes live clock ticks, both time formats, all three styles, preference retention after reload, countdown creation/pause/resume/reset/completion/removal, independent timers, zero-duration rejection, session-only timers, audio-unavailable visual completion, navigation from/to the hub and Orbit Deck, and horizontal control/page bounds at 320×720, 600×1024 and 1024×600. Runtime and console errors fail tests. Timer tests use Playwright's clock with fixed UTC/en-US settings, advancing time explicitly rather than sleeping. Each test gets isolated browser storage. There are no automatic retries to conceal failures.
+
+The suite uses Linux Chromium, not branded Windows Chrome/Edge or Silk. Viewport sizes are layout checks, not Fire 7 emulation. Controlled time cannot establish real background throttling, sleep/wake behavior, autoplay policy or audible output. The audio-unavailable test deliberately simulates a rejected AudioContext; it does not validate speakers or sound quality. Actual sound activation and audibility remain device checks.
+
+Local verification for this change: dependency installation, `npm run check`, and test discovery passed. The built preview could not start locally because the execution environment reports `uv_interface_addresses`; no local browser pass is claimed. GitHub Actions is the execution gate for the browser suite. The earlier Cloudflare type declaration problem was fixed by merged PR #13. Build/test success is not deployment proof.
 
 Before merging/releasing, test in Windows Chrome/Edge and Fire 7 Silk, portrait and landscape:
 
