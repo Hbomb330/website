@@ -197,6 +197,9 @@ export default function Home() {
                   </p>
                 )}
                 <div className="hub-card-actions">
+                  {app.id === "time-core" && (
+                    <a className="hub-download" href="/time-core">Launch Web App <span className="hub-sr">— Time Core browser clock and timers</span> ↗</a>
+                  )}
                   <a
                     className="hub-download"
                     href={`https://github.com/Hbomb330/hbombrg-com/releases/download/${app.file}`}
