@@ -16,6 +16,11 @@ export default defineConfig({
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
   },
+  projects: [
+    { name: 'chromium' },
+    { name: 'chrome', use: { channel: 'chrome' } },
+    { name: 'msedge', use: { channel: 'msedge' } },
+  ],
   webServer: {
     command: 'npx vite preview --host 127.0.0.1 --port 4173 --strictPort',
     url: 'http://127.0.0.1:4173/time-core',
