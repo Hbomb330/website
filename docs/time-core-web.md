@@ -29,18 +29,42 @@ Run locally (Node 22 recommended):
 npm ci
 npx playwright install --with-deps chromium
 npm run check
-npm run test:browser
+npm run test:browser -- --project=chromium
 ```
 
-Playwright starts a local Vite preview of the production build at `127.0.0.1:4173`; run `npm run check` or `npm run build` again after app changes. It does not deploy or contact the public app. CI runs these steps in the existing `check` job and uploads an HTML report plus failure traces/screenshots for seven days. Open a downloaded trace with `npx playwright show-trace path/to/trace.zip`.
+Playwright starts local Wrangler using the generated `build/server/wrangler.json` production-build configuration at `127.0.0.1:4173`; run `npm run check` or `npm run build` again after app changes. It does not deploy or contact the public app. The Linux `check` job runs these steps with the `chromium` project and uploads an HTML report plus failure traces/screenshots for seven days. Open a downloaded trace with `npx playwright show-trace path/to/trace.zip`.
 
 Coverage includes live clock ticks, both time formats, all three styles, preference retention after reload, countdown creation/pause/resume/reset/completion/removal, independent timers, zero-duration rejection, session-only timers, audio-unavailable visual completion, navigation from/to the hub and Orbit Deck, and horizontal control/page bounds at 320×720, 600×1024 and 1024×600. Runtime and console errors fail tests. Timer tests use Playwright's clock with fixed UTC/en-US settings, advancing time explicitly rather than sleeping. Each test gets isolated browser storage. There are no automatic retries to conceal failures.
 
-The suite uses Linux Chromium, not branded Windows Chrome/Edge or Silk. Viewport sizes are layout checks, not Fire 7 emulation. Controlled time cannot establish real background throttling, sleep/wake behavior, autoplay policy or audible output. The audio-unavailable test deliberately simulates a rejected AudioContext; it does not validate speakers or sound quality. Actual sound activation and audibility remain device checks.
+CI also runs the unchanged seven tests in separate `windows-latest` jobs using branded Chrome (`chrome`) and Edge (`msedge`) channels. Each job ensures its browser is installed, logs the Windows/browser versions, builds locally, and uploads a uniquely named report. Missing browsers or launch failures fail the job; they are not silently skipped. Matrix fail-fast is disabled so a failure in one browser does not cancel the other. Hosted Windows runners are not the user's physical Windows 11 PC. Silk is not automated. Viewport sizes are layout checks, not Fire 7 emulation. Controlled time cannot establish real background throttling, sleep/wake behavior, autoplay policy or audible output. The audio-unavailable test deliberately simulates a rejected AudioContext; it does not validate speakers or sound quality. Actual sound activation and audibility remain device checks.
 
-Local verification for this change: dependency installation, `npm run check`, and test discovery passed. The built preview could not start locally because the execution environment reports `uv_interface_addresses`; no local browser pass is claimed. GitHub Actions is the execution gate for the browser suite. The earlier Cloudflare type declaration problem was fixed by merged PR #13. Build/test success is not deployment proof.
+Historical local verification for the initial Linux suite: dependency installation, `npm run check`, and test discovery passed. The built preview could not start locally because the execution environment reports `uv_interface_addresses`; no local browser pass is claimed. GitHub Actions is the execution gate for the browser suite. The earlier Cloudflare type declaration problem was fixed by merged PR #13. Build/test success is not deployment proof.
 
-Before merging/releasing, test in Windows Chrome/Edge and Fire 7 Silk, portrait and landscape:
+### Windows preview-server investigation (October 20, 2026)
+
+The failed Edge trace from [run 39076173720](https://github.com/Hbomb330/website/actions/runs/39076173720) shows that the reload's `GET /time-core` returned HTTP 500 after about 6.25 seconds. Its HTML body contains `TypeError: fetch failed` in undici, `Miniflare.dispatchFetch`, and the Cloudflare Vite plugin proxy. The Clock format control was absent because the browser displayed this server error page, not because a stored preference had the wrong value. The logs alone do not identify the underlying socket/transport cause.
+
+The browser-test server now runs the already-built Worker directly through local Wrangler, avoiding the Vite preview proxy. This retains the real Worker, server rendering, built assets and Cloudflare runtime; it does not substitute a static mock or change deployment settings. All seven functional tests, console-error checks, parallel workers and zero retries remain unchanged. CI must pass on Linux Chromium and both branded Windows browsers before merge. This correction addresses the observed preview-server failure path, without claiming a proven upstream transport bug or physical-device verification.
+
+### Running branded browsers on Windows 11
+
+With Chrome and Edge already installed, run:
+
+```powershell
+npm ci
+npm run build
+npm run test:browser -- --project=chrome --project=msedge
+```
+
+Add `--headed` to observe the tests. If a browser is missing, install it first. CI uses `npx playwright install chrome` or `npx playwright install msedge` on disposable runners; these commands can replace an existing global browser installation, so they are not part of the local instructions. Running `npm run test:browser` without a project selects all three browsers and requires all three installed.
+
+Channel configuration follows https://playwright.dev/docs/browsers#google-chrome--microsoft-edge.
+
+### Physical-device checks
+
+The user reported successful Fire 7 tablet operation after PR #15. Retain that result separately from automated coverage; it does not establish Windows sound or sleep/wake behavior.
+
+On physical Windows 11, test both Chrome and Edge. For future tablet regressions, use Fire 7 Silk in portrait and landscape:
 
 1. Open `/time-core` directly and via Launch Web App; check that the live clock matches the device. Switch 12/24-hour format and all styles. Refresh to confirm preference retention.
 2. Enable/test sound and confirm all three tones are audible. Start two named 10-second countdowns. Confirm both show Finished and alert once. Check that ordinary timer ticks are not announced by a screen reader.

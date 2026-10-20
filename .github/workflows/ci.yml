@@ -22,12 +22,52 @@ jobs:
       - name: Install Chromium for browser smoke tests
         run: npx playwright install --with-deps chromium
       - name: Test built app in Chromium
-        run: npm run test:browser
+        run: npm run test:browser -- --project=chromium
       - name: Upload browser report and failure traces
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v4
         with:
           name: browser-smoke-report
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 7
+
+  windows-browser:
+    name: Windows ${{ matrix.browser }}
+    runs-on: windows-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chrome, msedge]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - name: Ensure branded browser is installed
+        run: npx playwright install ${{ matrix.browser }}
+      - name: Record Windows and browser versions
+        shell: pwsh
+        env:
+          BROWSER_CHANNEL: ${{ matrix.browser }}
+        run: |
+          Get-CimInstance Win32_OperatingSystem | Select-Object Caption, Version, BuildNumber
+          node --input-type=module -e "import { chromium } from '@playwright/test'; const browser = await chromium.launch({ channel: process.env.BROWSER_CHANNEL }); console.log(process.env.BROWSER_CHANNEL + ': ' + browser.version()); await browser.close();"
+      - name: Build app locally without deployment
+        run: npm run build
+      - name: Test built app in branded Windows browser
+        run: npm run test:browser -- --project=${{ matrix.browser }}
+      - name: Upload browser report and failure traces
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: browser-smoke-report-windows-${{ matrix.browser }}
           path: |
             playwright-report/
             test-results/
