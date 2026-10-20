@@ -22,7 +22,9 @@ export default defineConfig({
     { name: 'msedge', use: { channel: 'msedge' } },
   ],
   webServer: {
-    command: 'npx vite preview --host 127.0.0.1 --port 4173 --strictPort',
+    // Serve the built Worker directly: Vite's preview proxy returned a
+    // Miniflare dispatchFetch 500 for /time-core on Windows Edge reload.
+    command: 'npx wrangler dev --config build/server/wrangler.json --local --ip 127.0.0.1 --port 4173',
     url: 'http://127.0.0.1:4173/time-core',
     reuseExistingServer: false,
     timeout: 60_000,
