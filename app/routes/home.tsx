@@ -217,6 +217,40 @@ export default function Home() {
               </article>
             ))}
           </div>
+          <article className="hub-card hub-media-player" aria-labelledby="media-player-title">
+            <div className="hub-card-top">
+              <span className="hub-tag">Windows · Owner-tested prerelease</span>
+              <span className="hub-version">v1.6.4</span>
+            </div>
+            <div className="hub-glyph" aria-hidden="true">▶</div>
+            <p className="hub-label">MEDIA / FULLSCREEN VISUALS</p>
+            <h3 id="media-player-title">HB Media Player</h3>
+            <p className="hub-description">
+              Windows test package described by its publisher as including fullscreen visuals.
+              This is an owner-tested build, not a production release; broader compatibility
+              and functionality have not been independently verified.
+            </p>
+            <p className="hub-install-note">
+              Download the 141 MB ZIP, extract all files into a folder, then launch the
+              application from the extracted folder. Do not run it from inside the ZIP.
+            </p>
+            <p className="hub-install-note">
+              Verify the downloaded ZIP in PowerShell with
+              <code> Get-FileHash -Algorithm SHA256</code> and compare its result to
+              the published SHA-256 below.
+            </p>
+            <p className="hub-install-note" style={{ overflowWrap: "anywhere" }}>
+              SHA-256: <code>739cc1cad765a7ad9ad03f9631fbbe2ea3bc57abca76756439c025f6a32a9f1c</code>
+            </p>
+            <div className="hub-card-actions">
+              <a className="hub-download" href="https://github.com/Hbomb330/hbombrg-com/releases/download/store-tested-apps-2026-10-24/HBOMB-Media-Player-1.6.4-Fullscreen-Test.zip">
+                Download Windows test ZIP ↗
+              </a>
+              <a className="hub-preview" href="https://github.com/Hbomb330/hbombrg-com/releases/download/store-tested-apps-2026-10-24/SHA256SUMS.txt">
+                Published checksums ↗
+              </a>
+            </div>
+          </article>
           <a
             className="hub-help"
             href="https://hbombrg.com/#windows-install-help"
