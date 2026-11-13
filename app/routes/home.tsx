@@ -84,6 +84,7 @@ export default function Home() {
           </a>
           <div className="hub-nav">
             <a href="#apps">Windows apps</a>
+            <a href="https://hbombrg.com/">Main Store ↗</a>
             <a href="#labs">In development</a>
             <a href="/orbit-deck">Orbit Deck ↗</a>
           </div>
@@ -106,6 +107,9 @@ export default function Home() {
             <div className="hub-actions">
               <a className="hub-button hub-primary" href="#apps">
                 Find your next app <span aria-hidden="true">↗</span>
+              </a>
+              <a className="hub-button" href="https://hbombrg.com/">
+                Visit Main Store ↗
               </a>
               <a className="hub-button" href="#labs">
                 Explore the lab
