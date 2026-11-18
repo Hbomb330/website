@@ -394,6 +394,16 @@
   color: #b4c6d9;
   margin: 0 0 20px;
 }
+.hub-blue-wave .hub-install-note,
+.hub-media-player .hub-install-note {
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+.hub-install-note a {
+  color: var(--hub-cyan);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
 .hub-card-actions {
   margin-top: auto;
   padding-top: 20px;

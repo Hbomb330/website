@@ -24,13 +24,13 @@ const apps = [
   {
     id: "blue-wave",
     name: "Blue Wave",
-    version: "2.1.0",
+    version: "4.1",
     icon: "≈",
     kind: "DESKTOP ATMOSPHERE",
     description:
       "Animated waves, your own MP4 backgrounds, and automatic pausing for fullscreen games and apps.",
-    file: "blue-wave-v2.1.0/HBOMB.Blue.Wave.2.1.0.exe",
-    format: "EXE",
+    file: "blue-wave-v4.1.0/Blue-Wave-4.1-Windows.zip",
+    format: "Portable ZIP",
   },
   {
     id: "time-core",
@@ -194,6 +194,7 @@ export default function Home() {
                 <p className="hub-label">{app.kind}</p>
                 <h3>{app.name}</h3>
                 <p className="hub-description">{app.description}</p>
+                {app.id === "blue-wave" && (<p className="hub-install-note">Extract the entire ZIP to a new folder. Run <code>Start-Blue-Wave-4.1.cmd</code> beside <code>win-unpacked</code>; do not run it from inside the ZIP. <a href="https://github.com/Hbomb330/hbombrg-com/releases/download/blue-wave-v4.1.0/Blue-Wave-4.1-Release-SHA256.txt">4.1 checksums</a> · <a href="https://github.com/Hbomb330/hbombrg-com/releases/download/blue-wave-v4.1.0/Blue-Wave-4.1-Release-Notes.txt">Release notes</a> · Older fallback: <a href="https://github.com/Hbomb330/hbombrg-com/releases/download/blue-wave-v4.1.0/Blue-Wave-V4.zip">original V4 ZIP</a> or <a href="https://github.com/Hbomb330/hbombrg-com/releases/download/blue-wave-v2.1.0/HBOMB.Blue.Wave.2.1.0.exe">2.1.0 EXE</a>.</p>)}
                 {app.id === "weather" && (
                   <p className="hub-install-note">
                     Extract the whole ZIP. Keep resources and weather-assets
@@ -222,37 +223,19 @@ export default function Home() {
             ))}
           </div>
           <article className="hub-card hub-media-player" aria-labelledby="media-player-title">
-            <div className="hub-card-top">
-              <span className="hub-tag">Windows · Owner-tested prerelease</span>
-              <span className="hub-version">v1.6.4</span>
-            </div>
+            <div className="hub-card-top"><span className="hub-tag">Windows · Owner-tested prerelease</span><span className="hub-version">v1.7</span></div>
             <div className="hub-glyph" aria-hidden="true">▶</div>
-            <p className="hub-label">MEDIA / FULLSCREEN VISUALS</p>
-            <h3 id="media-player-title">HB Media Player</h3>
-            <p className="hub-description">
-              Windows test package described by its publisher as including fullscreen visuals.
-              This is an owner-tested build, not a production release; broader compatibility
-              and functionality have not been independently verified.
-            </p>
-            <p className="hub-install-note">
-              Download the 141 MB ZIP, extract all files into a folder, then launch the
-              application from the extracted folder. Do not run it from inside the ZIP.
-            </p>
-            <p className="hub-install-note">
-              Verify the downloaded ZIP in PowerShell with
-              <code> Get-FileHash -Algorithm SHA256</code> and compare its result to
-              the published SHA-256 below.
-            </p>
-            <p className="hub-install-note" style={{ overflowWrap: "anywhere" }}>
-              SHA-256: <code>739cc1cad765a7ad9ad03f9631fbbe2ea3bc57abca76756439c025f6a32a9f1c</code>
-            </p>
+            <p className="hub-label">MEDIA / CHROME EDITION</p>
+            <h3 id="media-player-title">HB Media Player 1.7 Chrome Edition</h3>
+            <p className="hub-description">Updated compact chrome/glass interface and subtle control transitions. Owner-tested on Windows; broader compatibility and Android functionality have not been verified.</p>
+            <p className="hub-install-note">Download the portable Windows ZIP, extract the entire archive into a new folder, then run the included EXE. Keep support files together; do not launch from inside the ZIP.</p>
+            <p className="hub-install-note">Verify with <code>Get-FileHash -Algorithm SHA256 -LiteralPath ".\\HBOMB-Media-Player-1.7-Chrome-Edition-Windows.zip"</code> and compare against the exact filename in the published checksum file.</p>
             <div className="hub-card-actions">
-              <a className="hub-download" href="https://github.com/Hbomb330/hbombrg-com/releases/download/store-tested-apps-2026-10-24/HBOMB-Media-Player-1.6.4-Fullscreen-Test.zip">
-                Download Windows test ZIP ↗
-              </a>
-              <a className="hub-preview" href="https://github.com/Hbomb330/hbombrg-com/releases/download/store-tested-apps-2026-10-24/SHA256SUMS.txt">
-                Published checksums ↗
-              </a>
+              <a className="hub-download" href="https://github.com/Hbomb330/hbombrg-com/releases/download/hb-media-player-1.7-chrome-edition/HBOMB-Media-Player-1.7-Chrome-Edition-Windows.zip">Download 1.7 Windows ZIP ↗</a>
+              <a className="hub-preview" href="https://github.com/Hbomb330/hbombrg-com/releases/download/hb-media-player-1.7-chrome-edition/HBOMB-Media-Player-1.7-SHA256.txt">1.7 checksums ↗</a>
+              <a className="hub-preview" href="https://github.com/Hbomb330/hbombrg-com/releases/download/hb-media-player-1.7-chrome-edition/HBOMB-Media-Player-1.7-Release-Notes.txt">Release notes ↗</a>
+              <a className="hub-preview" href="https://github.com/Hbomb330/hbombrg-com/releases/download/store-tested-apps-2026-10-24/HBOMB-Media-Player-1.6.4-Fullscreen-Test.zip">Older 1.6.4 fallback ZIP ↗</a>
+              <a className="hub-preview" href="https://github.com/Hbomb330/hbombrg-com/releases/download/store-tested-apps-2026-10-24/SHA256SUMS.txt">1.6.4 checksums ↗</a>
             </div>
           </article>
           <a
