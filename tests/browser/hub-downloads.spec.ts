@@ -32,7 +32,7 @@ for (const [width, height] of [[320, 568], [390, 844], [600, 1024], [768, 1024],
           const node = walker.currentNode;
           if (!node.textContent?.trim() || node.parentElement?.closest('.hub-sr')) continue;
           range.selectNodeContents(node);
-          if ([...range.getClientRects()].some(rect => rect.left < bounds.left - 1 || rect.right > bounds.right + 1)) {
+          if (Array.from(range.getClientRects()).some(rect => rect.left < bounds.left - 1 || rect.right > bounds.right + 1)) {
             return node.textContent;
           }
         }
